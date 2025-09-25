@@ -32,14 +32,17 @@ if (!MG_PASS || MG_PASS === "change-me") {
 }
 
 const driverConfig = { disableLosslessIntegers: true };
-const hasSecureScheme = /\+s/.test(resolvedUri);
-if (hasSecureScheme) {
-  driverConfig.encrypted = "ENCRYPTION_ON";
-}
+const uriScheme = resolvedUri.split("://")[0] ?? "";
+const uriSpecifiesSecurity = /\+s/.test(uriScheme);
+
 if (MG_TRUST) {
-  driverConfig.trust = MG_TRUST;
-} else if (/\+ssc/.test(resolvedUri)) {
-  driverConfig.trust = "TRUST_ALL_CERTIFICATES";
+  if (uriSpecifiesSecurity) {
+    console.warn(
+      "MG_TRUST is ignored because the URI scheme already configures encryption/trust."
+    );
+  } else {
+    driverConfig.trust = MG_TRUST;
+  }
 }
 
 const driver = neo4j.driver(resolvedUri, neo4j.auth.basic(MG_USER, MG_PASS), driverConfig);

@@ -20,7 +20,7 @@ an entire Bolt URI, or provide host components individually.
 | `MG_USER`      | yes      | Memgraph login (use a read-only role for safety).             |
 | `MG_PASS`      | yes      | Password for `MG_USER`.                                       |
 | `MG_DATABASE`  | optional | Specific database name, if your Memgraph installation uses multiple. |
-| `MG_TRUST`     | optional | Neo4j driver's `trust` option (defaults to `TRUST_ALL_CERTIFICATES` when using `+ssc`). |
+| `MG_TRUST`     | optional | Neo4j driver's `trust` option (ignored when your URI already includes `+s` or `+ssc`). |
 | `ALLOW_ORIGINS`| optional | Comma-separated list of allowed origins for CORS. Leave unset to allow any origin (useful for testing). |
 | `REQUEST_LIMIT`| optional | Body size limit for JSON payloads (default `256kb`).          |
 
