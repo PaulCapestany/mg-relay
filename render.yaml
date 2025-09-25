@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mg-relay
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MG_URI
+        sync: false
+      - key: MG_USER
+        sync: false
+      - key: MG_PASS
+        sync: false
+      - key: MG_DATABASE
+        sync: false
+      - key: ALLOW_ORIGINS
+        sync: false
+
